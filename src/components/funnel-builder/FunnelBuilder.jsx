@@ -83,6 +83,8 @@ const ElementToolbox = ({ onAddElement }) => {
 
 import FunnelPreview from './FunnelPreview';
 
+import { v4 as uuidv4 } from 'uuid';
+
 const FunnelBuilder = () => {
   const [elements, setElements] = useState([]);
   const [showPreview, setShowPreview] = useState(false);
