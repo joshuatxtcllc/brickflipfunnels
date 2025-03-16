@@ -32,7 +32,7 @@ const ProtectedRoute = ({ children }) => {
 
 // Navigation component
 const Navigation = () => {
-  const { logout, isAuth } = useAuth();
+  const { user, logout, isAuth } = useAuth();
   
   return (
     <nav className="bg-white shadow-sm p-4">
