@@ -2,6 +2,90 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { ELEMENT_TYPES } from '../../constants/elementTypes';
+import FunnelPreview from './FunnelPreview';
+
+const FunnelBuilder = () => {
+  const [elements, setElements] = useState([]);
+  const [showPreview, setShowPreview] = useState(false);
+
+  const handleAddElement = (type) => {
+    const newElement = {
+      id: uuidv4(),
+      type,
+      content: `New ${type} element`,
+    };
+    setElements([...elements, newElement]);
+  };
+
+  const handleUpdateElement = (id, updatedElement) => {
+    setElements(elements.map(el => el.id === id ? updatedElement : el));
+  };
+
+  const handleDeleteElement = (id) => {
+    setElements(elements.filter(el => el.id !== id));
+  };
+
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const items = Array.from(elements);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setElements(items);
+  };
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6">Funnel Builder</h2>
+      <ElementToolbox onAddElement={handleAddElement} />
+
+      <div className="bg-white p-6 border rounded shadow-sm">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="font-medium">Funnel Editor</h3>
+          <button
+            onClick={() => setShowPreview(!showPreview)}
+            className="text-sm bg-gray-100 px-3 py-1 rounded hover:bg-gray-200"
+          >
+            {showPreview ? 'Hide Preview' : 'Show Preview'}
+          </button>
+        </div>
+        {showPreview ? (
+          <FunnelPreview elements={elements} />
+        ) : (
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="funnel-elements">
+              {(provided) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className="min-h-[300px] p-4 border-2 border-dashed border-gray-300 rounded bg-gray-50 transition-colors hover:border-indigo-300"
+                >
+                  {elements.length === 0 ? (
+                    <p className="text-gray-400 text-center py-10">
+                      Drag elements here to build your funnel
+                    </p>
+                  ) : (
+                    elements.map((element, index) => (
+                      <FunnelElement
+                        key={element.id}
+                        element={element}
+                        index={index}
+                        onUpdate={handleUpdateElement}
+                        onDelete={handleDeleteElement}
+                      />
+                    ))
+                  )}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const FunnelElement = ({ element, index, onUpdate, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -76,93 +160,6 @@ const ElementToolbox = ({ onAddElement }) => {
             {type}
           </button>
         ))}
-      </div>
-    </div>
-  );
-};
-
-import FunnelPreview from './FunnelPreview';
-
-import { v4 as uuidv4 } from 'uuid';
-
-const FunnelBuilder = () => {
-  const [elements, setElements] = useState([]);
-  const [showPreview, setShowPreview] = useState(false);
-
-  const handleAddElement = (type) => {
-    const newElement = {
-      id: uuidv4(),
-      type,
-      content: `New ${type} element`,
-    };
-    setElements([...elements, newElement]);
-  };
-
-  const handleUpdateElement = (id, updatedElement) => {
-    setElements(elements.map(el => el.id === id ? updatedElement : el));
-  };
-
-  const handleDeleteElement = (id) => {
-    setElements(elements.filter(el => el.id !== id));
-  };
-
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
-
-    const items = Array.from(elements);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    setElements(items);
-  };
-
-  return (
-    <div>
-      <h2 className="text-2xl font-bold mb-6">Funnel Builder</h2>
-      <ElementToolbox onAddElement={handleAddElement} />
-
-      <div className="bg-white p-6 border rounded shadow-sm">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-medium">Funnel Editor</h3>
-          <button
-            onClick={() => setShowPreview(!showPreview)}
-            className="text-sm bg-gray-100 px-3 py-1 rounded hover:bg-gray-200"
-          >
-            {showPreview ? 'Hide Preview' : 'Show Preview'}
-          </button>
-        </div>
-        {showPreview ? (
-          <FunnelPreview elements={elements} />
-        ) : (
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="funnel-elements">
-            {(provided) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="min-h-[300px] p-4 border-2 border-dashed border-gray-300 rounded bg-gray-50 transition-colors hover:border-indigo-300"
-              >
-                {elements.length === 0 ? (
-                  <p className="text-gray-400 text-center py-10">
-                    Drag elements here to build your funnel
-                  </p>
-                ) : (
-                  elements.map((element, index) => (
-                    <FunnelElement
-                      key={element.id}
-                      element={element}
-                      index={index}
-                      onUpdate={handleUpdateElement}
-                      onDelete={handleDeleteElement}
-                    />
-                  ))
-                )}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-        )}
       </div>
     </div>
   );
