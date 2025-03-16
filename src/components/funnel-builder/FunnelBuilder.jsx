@@ -117,7 +117,18 @@ const FunnelBuilder = () => {
       <ElementToolbox onAddElement={handleAddElement} />
 
       <div className="bg-white p-6 border rounded shadow-sm">
-        <h3 className="font-medium mb-4">Funnel Preview</h3>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="font-medium">Funnel Editor</h3>
+          <button
+            onClick={() => setShowPreview(!showPreview)}
+            className="text-sm bg-gray-100 px-3 py-1 rounded hover:bg-gray-200"
+          >
+            {showPreview ? 'Hide Preview' : 'Show Preview'}
+          </button>
+        </div>
+        {showPreview ? (
+          <FunnelPreview elements={elements} />
+        ) : (
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="funnel-elements">
             {(provided) => (
@@ -146,6 +157,7 @@ const FunnelBuilder = () => {
             )}
           </Droppable>
         </DragDropContext>
+        )}
       </div>
     </div>
   );
