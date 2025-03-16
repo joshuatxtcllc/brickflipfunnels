@@ -6,7 +6,7 @@ import { ELEMENT_TYPES } from '../../constants/elementTypes';
 const ElementToolbox = () => {
   return (
     <div className="bg-white p-6 border rounded shadow-sm mb-6">
-      <h3 className="font-medium mb-4">Available Elements</h3>
+      <h3 className="font-medium mb-4">Available Elements (Drag to Build)</h3>
       <Droppable droppableId="element-toolbox" isDropDisabled={true}>
         {(provided) => (
           <div
