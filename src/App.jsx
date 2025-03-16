@@ -38,6 +38,7 @@ const Navigation = () => {
     <nav className="bg-white shadow-sm p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="font-bold text-xl text-indigo-600">Kickflip Funnels</Link>
+        {user && <span className="text-gray-600 ml-4">Welcome, {user.name}</span>}
         <div className="flex space-x-4">
           <Link to="/" className="text-gray-600 hover:text-indigo-600">Home</Link>
           {isAuth && (
