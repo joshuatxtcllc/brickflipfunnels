@@ -124,7 +124,7 @@ const FunnelBuilder = () => {
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className="min-h-[300px] p-4 border border-dashed border-gray-300 rounded"
+                className="min-h-[300px] p-4 border-2 border-dashed border-gray-300 rounded bg-gray-50 transition-colors hover:border-indigo-300"
               >
                 {elements.length === 0 ? (
                   <p className="text-gray-400 text-center py-10">
