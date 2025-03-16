@@ -4,6 +4,9 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { ELEMENT_TYPES } from '../../constants/elementTypes';
 import FunnelPreview from './FunnelPreview';
 
+import { useFunnel } from '../../context/FunnelContext';
+import { toast } from 'react-toastify';
+
 const FunnelBuilder = () => {
   const [elements, setElements] = useState([]);
   const [showPreview, setShowPreview] = useState(false);
