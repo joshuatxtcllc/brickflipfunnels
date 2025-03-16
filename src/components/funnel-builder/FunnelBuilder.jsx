@@ -35,6 +35,11 @@ const FunnelBuilder = () => {
     setElements(items);
   };
 
+  const handleSave = () => {
+    // Add your save logic here
+    console.log("Apply Changes clicked!");
+  };
+
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Funnel Builder</h2>
@@ -82,6 +87,20 @@ const FunnelBuilder = () => {
             </Droppable>
           </DragDropContext>
         )}
+        <div className="mt-6 flex justify-end space-x-4">
+            <button
+              onClick={() => setShowPreview(!showPreview)}
+              className="bg-gray-100 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-200"
+            >
+              {showPreview ? 'Hide Preview' : 'Preview'}
+            </button>
+            <button
+              onClick={handleSave}
+              className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
+            >
+              Apply Changes
+            </button>
+          </div>
       </div>
     </div>
   );
