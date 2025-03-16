@@ -1,0 +1,62 @@
+# Kickflip Funnels - Project Structure
+
+```
+kickflip-funnels/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── robots.txt
+├── src/
+│   ├── assets/
+│   │   └── logo.svg
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Button.jsx
+│   │   │   └── Modal.jsx
+│   │   ├── dashboard/
+│   │   │   ├── AdminDashboard.jsx
+│   │   │   ├── FunnelList.jsx
+│   │   │   └── Analytics.jsx
+│   │   ├── funnel-builder/
+│   │   │   ├── FunnelBuilder.jsx
+│   │   │   ├── DragDropContainer.jsx
+│   │   │   ├── FunnelElement.jsx
+│   │   │   └── ElementToolbox.jsx
+│   │   └── chat/
+│   │       ├── AiChat.jsx
+│   │       ├── ChatMessage.jsx
+│   │       └── ChatInput.jsx
+│   ├── context/
+│   │   ├── FunnelContext.jsx
+│   │   └── AuthContext.jsx
+│   ├── hooks/
+│   │   ├── useDragDrop.js
+│   │   └── useAiChat.js
+│   ├── layout/
+│   │   ├── MainLayout.jsx
+│   │   ├── Navigation.jsx
+│   │   └── Footer.jsx
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Builder.jsx
+│   │   ├── Dashboard.jsx
+│   │   └── NotFound.jsx
+│   ├── services/
+│   │   ├── api.js
+│   │   ├── funnelService.js
+│   │   └── chatService.js
+│   ├── styles/
+│   │   ├── global.css
+│   │   └── variables.css
+│   ├── utils/
+│   │   ├── helpers.js
+│   │   └── validation.js
+│   ├── App.jsx
+│   ├── index.jsx
+│   └── routes.js
+├── .gitignore
+├── .env.example
+├── netlify.toml
+├── package.json
+└── README.md
+```
