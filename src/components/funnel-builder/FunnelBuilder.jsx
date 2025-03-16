@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { ELEMENT_TYPES } from '../../constants/elementTypes';
 import { v4 as uuidv4 } from 'uuid';
