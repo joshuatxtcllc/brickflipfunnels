@@ -81,8 +81,11 @@ const ElementToolbox = ({ onAddElement }) => {
   );
 };
 
+import FunnelPreview from './FunnelPreview';
+
 const FunnelBuilder = () => {
   const [elements, setElements] = useState([]);
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleAddElement = (type) => {
     const newElement = {
